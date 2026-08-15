@@ -155,6 +155,16 @@
 
   var CODE='', CANDIDATS=[], SELECTION=[];
 
+  /* Pré-remplissage depuis le lien WhatsApp : ...?code=YJ4-PSN */
+  (function(){
+    var m = new URLSearchParams(window.location.search).get('code');
+    if(m){
+      m = m.toUpperCase().replace(/[^A-Z0-9]/g,'');
+      if(m.length>3) m = m.slice(0,3)+'-'+m.slice(3,6);
+      $('code').value = m;
+    }
+  })();
+
   /* auto-format XXX-XXX */
   $('code').addEventListener('input', function(){
     var v=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
